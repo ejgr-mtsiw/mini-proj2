@@ -11,10 +11,10 @@ window.onload = () => {
             <thead >
                 <tr><th class='w-100 text-center bg-warning' colspan='4'>Lista de Participantes</th></tr>
                 <tr class='bg-info'>
-                    <th class='w-2'>#</th>
-                    <th class='w-50'>Nome</th>
-                    <th class='w-38'>E-mail</th>              
-                    <th class='w-10'>Ações</th>              
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>E-mail</th>              
+                    <th class="text-right">Ações</th>              
                 </tr> 
             </thead><tbody>
         `
@@ -27,7 +27,9 @@ window.onload = () => {
                     <td>${i}</td>
                     <td>${participant.nomeParticipante}</td>
                     <td>${participant.idParticipant}</td>
-                    <td><i id='${participant.idParticipant}' class='fas fa-trash-alt remove'></i></td>
+                    <td class="text-right">
+                    <i id='${participant.idParticipant}' class='fas fa-trash-alt remove'></i>
+                    </td>
                 </tr>
             `        
             i++

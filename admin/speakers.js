@@ -64,10 +64,10 @@ window.onload = () => {
             <thead >
                 <tr><th class='w-100 text-center bg-warning' colspan='4'>Lista de Oradores</th></tr>
                 <tr class='bg-info'>
-                    <th class='w-2'>#</th>
-                    <th class='w-50'>Nome</th>
-                    <th class='w-38'>Cargo</th>              
-                    <th class='w-10'>Ações</th>              
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>Cargo</th>              
+                    <th class="text-right">Ações</th>              
                 </tr> 
             </thead><tbody>
         `
@@ -80,7 +80,7 @@ window.onload = () => {
                     <td>${i}</td>
                     <td>${speaker.nome}</td>
                     <td>${speaker.cargo}</td>
-                    <td>
+                    <td class="text-right">
                         <i id='${speaker.idSpeaker}' class='fas fa-edit edit'></i>
                         <i id='${speaker.idSpeaker}' class='fas fa-trash-alt remove'></i>
                     </td>

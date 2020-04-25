@@ -89,12 +89,12 @@ window.onload = () => {
                     </th>
                 </tr>
                 <tr class='bg-info'>
-                    <th class='w-2'>#</th>
-                    <th class='w-50'>Nome</th>
-                    <th class='w-40'>E-mail</th>              
-                    <th class='w-40'>Instituição</th>
-                    <th class='w-30'>Cargo</th>
-                    <th class='w-10'>Ações</th>              
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>E-mail</th>              
+                    <th>Instituição</th>
+                    <th>Cargo</th>
+                    <th class="text-right">Ações</th>              
                 </tr> 
             </thead><tbody>
         `
@@ -127,7 +127,7 @@ window.onload = () => {
                 'bio': 'A minha história',
             },
             {
-                'id': 1,
+                'id': 2,
                 'name': 'Outro Membro',
                 'email': 'teste@teste.com',
                 'institution': 'Outra Universidade',
@@ -148,7 +148,7 @@ window.onload = () => {
                     <td>${member.email}</td>
                     <td>${member.institution}</td>
                     <td>${member.office}</td>
-                    <td>
+                    <td class="text-right">
                         <i id='${member.id}' class='fas fa-edit edit'></i>
                         <i id='${member.id}' class='fas fa-trash-alt remove'></i>
                     </td>

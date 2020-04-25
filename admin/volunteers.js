@@ -60,11 +60,11 @@ window.onload = () => {
             <thead >
                 <tr><th class='w-100 text-center bg-warning' colspan='5'>Lista de Voluntários</th></tr>
                 <tr class='bg-info'>
-                    <th class='w-2'>#</th>
-                    <th class='w-50'>Nome</th>
-                    <th class='w-40'>E-mail</th>              
-                    <th class='w-30'>Telemóvel</th>
-                    <th class='w-10'>Ações</th>              
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>E-mail</th>              
+                    <th>Telemóvel</th>
+                    <th class="text-right">Ações</th>              
                 </tr> 
             </thead><tbody>
         `
@@ -92,7 +92,7 @@ window.onload = () => {
                     <td>${volunteer.name}</td>
                     <td>${volunteer.email}</td>
                     <td>${volunteer.phone}</td>
-                    <td>
+                    <td class="text-right">
                         <i id='${volunteer.id}' class='fas fa-edit edit'></i>
                         <i id='${volunteer.id}' class='fas fa-trash-alt remove'></i>
                     </td>
