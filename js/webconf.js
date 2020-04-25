@@ -32,6 +32,14 @@ window.onload = function () {
         if (email.length == 0 || pass.length == 0) {
           Swal.showValidationMessage('Dados inválidos!')
           return
+        } else {
+          //! TODO: FIX THIS!
+          //! Signin is not working, so as long as we write something we login
+          //Swal.fire({ title: "Autenticação feita com sucesso!" })
+          // Guardar token
+          sessionStorage.token = email;
+          window.location.replace("admin/participants.html")
+          return
         }
 
         return fetch(`${urlBase}/signin`, {
@@ -42,13 +50,18 @@ window.onload = function () {
           body: `email=${email}&password=${pass}`
         })
           .then((response) => {
-            if (!response.ok) {
+            if (!response.hasOwnProperty("success")) {
               throw new Error(response.statusText);
             }
+
+            if (response.success == 'false') {
+              Swal.showValidationMessage(`Pedido falhado: ${response.message.pt}`);
+            }
+
             return response.json();
           })
           .catch(error => {
-            Swal.showValidationError(`Pedido falhado: ${error}`);
+            Swal.showValidationMessage(`Pedido falhado: ${error}`);
           });
       },
       allowOutsideClick: () => !Swal.isLoading()
@@ -56,6 +69,8 @@ window.onload = function () {
       if (!result.dismiss) {
         if (result.value.sucesss) {
           Swal.fire({ title: "Autenticação feita com sucesso!" })
+          // Guardar token
+          sessionStorage.token = email;
           window.location.replace("admin/participants.html")
         } else {
           Swal.fire({ title: `${result.value.message.pt}` })
@@ -283,17 +298,3 @@ function myMap() {
   })
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

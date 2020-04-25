@@ -67,7 +67,7 @@ window.onload = () => {
                     <th class='w-2'>#</th>
                     <th class='w-50'>Nome</th>
                     <th class='w-38'>Cargo</th>              
-                    <th class='w-10'>Foto</th>              
+                    <th class='w-10'>Ações</th>              
                 </tr> 
             </thead><tbody>
         `
