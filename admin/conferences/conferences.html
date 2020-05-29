@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="pt">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>WebConference Admin - Conferências</title>
+
+  <script>
+    if (!sessionStorage.token) {
+      window.location.replace("../../index.html")
+    }
+  </script>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <!-- Custom styles for this template-->
+  <link href="../../css/sb-admin.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+    integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+</head>
+
+<body id="page-top">
+  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+    <a class="navbar-brand mr-1" href="dashboard.html">WebConference Admin</a>
+    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+      <i class="fas fa-bars"></i>
+    </button>
+    <ul class="navbar-nav ml-auto">
+      <li>
+        <a id="logout" class="navbar-brand mr-auto" href="#">Logout</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="sidebar navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="../conferences/conferences.html">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Conferências</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../speakers/speakers.html">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Oradores</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../sponsors/sponsors.html">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Sponsors</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../volunteers/volunteers.html">
+          <i class="fas fa-hands-helping"></i>
+          <span>Voluntários</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../committee/committee.html">
+          <i class="fas fa-fw fa-award"></i>
+          <span>Comité Científico</span></a>
+      </li>
+    </ul>
+
+    <div id="content-wrapper">
+      <div class="container-fluid">
+        <div class="jumbotron">
+          <h1 class="display-3">Conferências</h1>
+          <p class="lead">Gestão das Conferências</p>
+          <hr class="my-2">
+        </div>
+          <div class="container">
+            <nav>
+              <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-conference-tab" data-toggle="tab" href="#nav-conference"
+                  role="tab" aria-controls="nav-conference" aria-selected="true">Conferência</a>
+                <a class="nav-item nav-link" id="nav-speakers-tab" data-toggle="tab" href="#nav-speakers" role="tab"
+                  aria-controls="nav-speakers" aria-selected="false">Oradores</a>
+                <a class="nav-item nav-link" id="nav-sponsors-tab" data-toggle="tab" href="#nav-sponsors" role="tab"
+                  aria-controls="nav-sponsors" aria-selected="false">Sponsors</a>
+                <a class="nav-item nav-link" id="nav-committee-tab" data-toggle="tab" href="#nav-committee" role="tab"
+                  aria-controls="nav-committee" aria-selected="false">Comité Científico</a>
+                <a class="nav-item nav-link" id="nav-tasks-tab" data-toggle="tab" href="#nav-tasks" role="tab"
+                  aria-controls="nav-tasks" aria-selected="false">Tarefas</a>
+                <a class="nav-item nav-link" id="nav-participants-tab" data-toggle="tab" href="#nav-participants"
+                  role="tab" aria-controls="nav-participants" aria-selected="false">Participantes</a>
+              </div>
+            </nav>
+            <div class="tab-content p-3" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="nav-conference" role="tabpanel"
+                aria-labelledby="nav-conference-tab">
+                <!--############### DADOS DA CONFERÊNCIA ###################-->
+                <div id="divConference" class="container">
+                  <form id="frmConference">
+                    <input type="hidden" id="txtConferenceId">
+
+                    <div class="row">
+                      <div class="form-group col">
+                        <label for="txtNome">Nome</label>
+                        <input type="text" placeholder="Nome" class="form-control" id="txtNome" required>
+                      </div>
+                      <div class="form-group col">
+                        <label for="txtAcronimo">Acrónimo</label>
+                        <input type="text" placeholder="Acrónimo" class="form-control" id="txtAcronimo" required>
+                      </div>
+                      <div class="form-group col-md-2">
+                        <label for="txtData">Data</label>
+                        <input type="date" placeholder="Data" class="form-control" id="txtData" required>
+                      </div>
+                    </div>
+
+                    <div class="form-group ">
+                      <label for="txtDescricao">Descrição</label>
+                      <input type="text" placeholder="Descrição" class="form-control" id="txtDescricao" required>
+                    </div>
+
+                    <div class="form-group ">
+                      <label for="txtLocal">Local</label>
+                      <input type="text" placeholder="Local" class="form-control" id="txtLocal" required>
+                    </div>
+
+                    <!-- Buttons-->
+                    <div class="form-row">
+                      <div class="form-group col-md-12">
+                        <button type="submit" class="btn btn-primary mb-2">Guardar Conferência</button>
+                        <button type="reset" class="btn btn-primary mb-2">Limpar valores</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <!--##################### ORADORES ###################-->
+              <div class="tab-pane fade" id="nav-speakers" role="tabpanel" aria-labelledby="nav-speakers-tab">
+                <div id="divSpeakers" class="container">
+                  <!-- Table -->
+                  <div class="table-responsive">
+                    <table id="tblSpeakers" class="table table-sm">
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <!--##################### SPONSORS ###################-->
+              <div class="tab-pane fade" id="nav-sponsors" role="tabpanel" aria-labelledby="nav-sponsors-tab">
+                <div id="divSponsors" class="container">
+                  <!-- Table -->
+                  <div class="table-responsive">
+                    <table id="tblSponsors" class="table table-sm">
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <!--##################### COMMITTEE ###################-->
+              <div class="tab-pane fade" id="nav-committee" role="tabpanel" aria-labelledby="nav-committee-tab">
+                <div id="divCommittee" class="container">
+                  <!-- Table -->
+                  <div class="table-responsive">
+                    <table id="tblCommittee" class="table table-sm">
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <!--##################### TASKS ###################-->
+              <div class="tab-pane fade" id="nav-tasks" role="tabpanel" aria-labelledby="nav-tasks-tab">
+                <div id="divTasks" class="container">
+                  <!-- Table -->
+                  <div class="table-responsive">
+                    <div id="tblTasks">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--################## PARTICIPANTES ###################-->
+              <div class="tab-pane fade" id="nav-participants" role=" tabpanel" aria-labelledby="nav-participants-tab">
+                <div id="divParticipants" class="container">
+                  <!-- Table -->
+                  <div class="table-responsive">
+                    <table id="tblParticipants" class="table table-sm">
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--################## CONFERENCES ###################-->
+            <div id="divConferences" class="container-fluid p-3 m-3 shadow">
+              <!-- Table -->
+              <div class="table-responsive">
+                <table id="tblConferences" class="table table-sm">
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright © WebConference 2020</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.5.0.min.js"
+    integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="conferences.js"></script>
+</body>
+
+</html>
