@@ -1,6 +1,15 @@
 window.onload = function () {
     const urlBase = "https://mtsiw.duckdns.org/pwa";
-    const idConference = 2;
+    var idConference = 1;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('signout')) {
+        sessionStorage.removeItem("token");
+    }
+
+    if (urlParams.get('idConference')) {
+        idConference = Number(urlParams.get('idConference'));
+    }
 
     const btnLogin = document.getElementById("btnLogin");
     const btnRegister = document.getElementById("btnRegister");
