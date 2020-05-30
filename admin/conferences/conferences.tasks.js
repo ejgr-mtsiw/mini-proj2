@@ -75,13 +75,13 @@ const renderTasks = async (idConference, conferenceName, urlBase) => {
                 <label for="txtTaskNome">Nome</label>
                 <input type="text" placeholder="Nome" class="form-control" id="txtTaskNome" required>
                 </div>
-                <div class="form-group col col-md-2">
+                <div class="form-group col col-md-3">
                 <label for="txtTaskInicio">Início</label>
-                <input type="text" class="form-control" id="txtTaskInicio" required>
+                <input type="text" class="form-control" placeholder="${moment.utc().format('YYYY-MM-DD HH:mm')}" id="txtTaskInicio" required>
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-3">
                 <label for="txtTaskFim">Fim</label>
-                <input type="text" class="form-control" id="txtTaskFim" required>
+                <input type="text" class="form-control" placeholder="${moment.utc().format('YYYY-MM-DD HH:mm')}" id="txtTaskFim" required>
                 </div>
             </div>
 
@@ -171,7 +171,7 @@ const renderTasks = async (idConference, conferenceName, urlBase) => {
             });
         }
 
-        renderTasks(idConference, conferenceName);
+        renderTasks(idConference, conferenceName, urlBase);
     });
 
     // Manage click delete task    
@@ -267,10 +267,7 @@ function hideTab() {
 }
 
 function formatDate(dateString) {
-    let d = new Date(Date.parse(dateString));
-
-    return d.getDay() + '-' + d.getMonth() + '-' + d.getFullYear() + ' ' +
-        d.getHours() + ':' + d.getMinutes();
+    return moment.utc(dateString).format("YYYY-MM-DD HH:mm");
 }
 
 export { renderTasks, showTab, hideTab, formatDate };
