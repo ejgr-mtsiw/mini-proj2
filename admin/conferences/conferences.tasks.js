@@ -75,13 +75,11 @@ const renderTasks = async (idConference, conferenceName, urlBase) => {
                 <label for="txtTaskNome">Nome</label>
                 <input type="text" placeholder="Nome" class="form-control" id="txtTaskNome" required>
                 </div>
-                <div class="form-group col col-md-3">
-                <label for="txtTaskInicio">Início</label>
-                <input type="text" class="form-control" placeholder="${moment.utc().format('YYYY-MM-DD HH:mm')}" id="txtTaskInicio" required>
-                </div>
-                <div class="form-group col-md-3">
-                <label for="txtTaskFim">Fim</label>
-                <input type="text" class="form-control" placeholder="${moment.utc().format('YYYY-MM-DD HH:mm')}" id="txtTaskFim" required>
+                <div class="form-group col col-md-4">
+                <label for="txtTaskInicio">Duração</label>
+                <input type="hidden" id="txtTaskInicio" value="2020-05-30">
+                <input type="hidden" id="txtTaskFim" value="2020-05-30">
+                <input class="form-control" type="text" id="daterange" value="2020-05-30 - 2020-05-30" required>
                 </div>
             </div>
 
@@ -116,7 +114,7 @@ const renderTasks = async (idConference, conferenceName, urlBase) => {
             // Verifica flag isNew para saber se se trata de uma adição ou
             // de uma atualização dos dados de uma conferência
             let response;
-            let msgBody = `idConference=${idConference}&nome=${nome}&inicio=${inicio}&fim=${fim}`;
+            let msgBody = `idConference=${idConference}&nome=${nome}&inicio=${formatDate(inicio)}&fim=${formatDate(fim)}`;
             if (isNewTask) {
                 // Adiciona Tarefa
                 response = await fetch(`${urlBase}/tasks`, {
@@ -251,6 +249,7 @@ const renderTasks = async (idConference, conferenceName, urlBase) => {
         });
     }
 
+    prepareDateRange();
     showTab();
 }
 
@@ -268,6 +267,43 @@ function hideTab() {
 
 function formatDate(dateString) {
     return moment.utc(dateString).format("YYYY-MM-DD HH:mm");
+}
+
+function prepareDateRange() {
+    $("#daterange").daterangepicker({
+        timePicker: true,
+        timePicker24Hour: true,
+        locale: {
+            format: "YYYY-MM-DD HH:mm",
+            separator: " - ",
+            applyLabel: "Aplicar",
+            cancelLabel: "Cancelar",
+            fromLabel: "De",
+            toLabel: "Até",
+            customRangeLabel: "Personalizar",
+            weekLabel: "S",
+            daysOfWeek: ["D", "S", "T", "Q", "Q", "S", "S"],
+            monthNames: [
+                "Janeiro",
+                "Fevereiro",
+                "Março",
+                "Abril",
+                "Maio",
+                "Junho",
+                "Julho",
+                "Agosto",
+                "Setembro",
+                "Outubro",
+                "Novembro",
+                "Dezembro"
+            ],
+            firstDay: 1
+        },
+        opens: 'left'
+    }, function (start, end, label) {
+        $('#txtTaskInicio').val(start.format('YYYY-MM-DD HH:mm'));
+        $('#txtTaskFim').val(end.format('YYYY-MM-DD HH:mm'));
+    });
 }
 
 export { renderTasks, showTab, hideTab, formatDate };
