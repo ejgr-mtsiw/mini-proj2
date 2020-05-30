@@ -122,14 +122,14 @@ window.onload = () => {
                 let idSpeaker = this.getAttribute('idspeaker');
                 for (const speaker of speakers) {
                     if (speaker.idSpeaker == idSpeaker) {
-                        document.getElementById("txtSpeakerId").value = speaker.idSpeaker
-                        document.getElementById("txtName").value = speaker.nome
-                        document.getElementById("txtJob").value = speaker.cargo
-                        document.getElementById("txtPhoto").value = speaker.foto
-                        document.getElementById("txtFacebook").value = speaker.facebook
-                        document.getElementById("txtTwitter").value = speaker.twitter
-                        document.getElementById("txtLinkedin").value = speaker.linkedin
-                        document.getElementById("txtBio").value = speaker.bio
+                        document.getElementById("txtSpeakerId").value = speaker.idSpeaker;
+                        document.getElementById("txtName").value = validator.unescape(speaker.nome);
+                        document.getElementById("txtJob").value = validator.unescape(speaker.cargo);
+                        document.getElementById("txtPhoto").value = validator.unescape(speaker.foto);
+                        document.getElementById("txtFacebook").value = validator.unescape(speaker.facebook);
+                        document.getElementById("txtTwitter").value = validator.unescape(speaker.twitter);
+                        document.getElementById("txtLinkedin").value = validator.unescape(speaker.linkedin);
+                        document.getElementById("txtBio").value = validator.unescape(speaker.bio);
                     }
                 }
             })

@@ -1,6 +1,6 @@
 window.onload = function () {
     const urlBase = "https://mtsiw.duckdns.org/pwa";
-    const idConference = 1;
+    const idConference = 2;
 
     const btnLogin = document.getElementById("btnLogin");
     const btnRegister = document.getElementById("btnRegister");
@@ -115,7 +115,7 @@ window.onload = function () {
                         "Content-Type": "application/x-www-form-urlencoded"
                     },
                     method: "POST",
-                    body: `idConference=1&email=${email}&nome=${nome}`
+                    body: `idConference=${idConference}&email=${email}&nome=${nome}`
                 })
                     .then((response) => {
                         if (!response.ok) {
@@ -199,7 +199,7 @@ window.onload = function () {
                         Swal.fire({
                             title: speaker.nome,
                             text: speaker.bio,
-                            imageUrl: speaker.foto,
+                            imageUrl: validator.unescape(speaker.foto),
                             imageWidth: 400,
                             imageHeight: 400,
                             imageAlt: 'Foto do orador'
@@ -225,7 +225,7 @@ window.onload = function () {
         for (const sponsor of sponsors) {
             txtSponsors += `
     <div class="col-md-3 col-sm-6">
-      <a href="#" target="_blank">
+      <a href="${sponsor.link}" target="_blank">
         <img class="img-fluid d-block mx-auto" src="${sponsor.logo}" alt="${sponsor.nome}">
       </a>
     </div>`

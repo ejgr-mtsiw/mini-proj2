@@ -140,12 +140,12 @@ const bootConferences = async () => {
                 let idConference = this.getAttribute('idconference');
                 for (const conference of conferences) {
                     if (conference.idConference == idConference) {
-                        document.getElementById("txtConferenceId").value = conference.idConference
-                        document.getElementById("txtNome").value = conference.nome
-                        document.getElementById("txtAcronimo").value = conference.acronimo
-                        document.getElementById("txtDescricao").value = conference.descricao
-                        document.getElementById("txtLocal").value = conference.local
-                        document.getElementById("txtData").value = conference.data
+                        document.getElementById("txtConferenceId").value = conference.idConference;
+                        document.getElementById("txtNome").value = validator.unescape(conference.nome);
+                        document.getElementById("txtAcronimo").value = validator.unescape(conference.acronimo);
+                        document.getElementById("txtDescricao").value = validator.unescape(conference.descricao);
+                        document.getElementById("txtLocal").value = validator.unescape(conference.local);
+                        document.getElementById("txtData").value = conference.data;
 
                         renderSpeakers(idConference, conference.nome, urlBase);
                         renderSponsors(idConference, conference.nome, urlBase);

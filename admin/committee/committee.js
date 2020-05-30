@@ -145,15 +145,15 @@ window.onload = () => {
                 for (const member of members) {
                     if (member.idCommitteeMember == idCommitteeMember) {
                         document.getElementById("txtCommitteeMemberId").value = member.idCommitteeMember;
-                        document.getElementById("txtNome").value = member.nome;
-                        document.getElementById("txtEmail").value = member.email;
-                        document.getElementById("txtInstituicao").value = member.instituicao;
-                        document.getElementById("txtCargo").value = member.cargo;
-                        document.getElementById("txtFoto").value = member.foto;
-                        document.getElementById("txtFacebook").value = member.facebook;
-                        document.getElementById("txtTwitter").value = member.twitter;
-                        document.getElementById("txtLinkedin").value = member.linkedin;
-                        document.getElementById("txtBio").value = member.bio;
+                        document.getElementById("txtNome").value = validator.unescape(member.nome);
+                        document.getElementById("txtEmail").value = validator.unescape(member.email);
+                        document.getElementById("txtInstituicao").value = validator.unescape(member.instituicao);
+                        document.getElementById("txtCargo").value = validator.unescape(member.cargo);
+                        document.getElementById("txtFoto").value = validator.unescape(member.foto);
+                        document.getElementById("txtFacebook").value = validator.unescape(member.facebook);
+                        document.getElementById("txtTwitter").value = validator.unescape(member.twitter);
+                        document.getElementById("txtLinkedin").value = validator.unescape(member.linkedin);
+                        document.getElementById("txtBio").value = validator.unescape(member.bio);
                     }
                 }
             })

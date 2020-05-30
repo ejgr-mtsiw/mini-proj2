@@ -120,10 +120,10 @@ window.onload = () => {
                 for (const sponsor of sponsors) {
                     if (sponsor.idSponsor == idSponsor) {
                         document.getElementById("txtSponsorId").value = sponsor.idSponsor;
-                        document.getElementById("txtName").value = sponsor.nome;
-                        document.getElementById("txtLogo").value = sponsor.logo;
-                        document.getElementById("txtCategory").value = sponsor.categoria;
-                        document.getElementById("txtLink").value = sponsor.link;
+                        document.getElementById("txtName").value = validator.unescape(sponsor.nome);
+                        document.getElementById("txtLogo").value = validator.unescape(sponsor.logo);
+                        document.getElementById("txtCategory").value = validator.unescape(sponsor.categoria);
+                        document.getElementById("txtLink").value = validator.unescape(sponsor.link);
                     }
                 }
             });
