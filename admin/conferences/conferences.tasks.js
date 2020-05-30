@@ -12,7 +12,7 @@ const renderTasks = async (idConference, conferenceName, urlBase) => {
     response = await fetch(`${urlBase}/volunteers/`);
     const volunteers = await response.json();
 
-    let nColunas = 4 + volunteers.length;
+    let nColunas = 5 + volunteers.length;
 
     let strHtml = `
         <table class="table table-sm">
@@ -22,7 +22,8 @@ const renderTasks = async (idConference, conferenceName, urlBase) => {
                 <th>#</th>
                 <th>Tarefa</th>
                 <th>Início</th>
-                <th>Fim</th>`;
+                <th>Fim</th>
+                <th>Ações</th>`;
 
     for (const volunteer of volunteers) {
         strHtml += `<th class="col-1">${volunteer.nome}</th>`;
@@ -38,7 +39,8 @@ const renderTasks = async (idConference, conferenceName, urlBase) => {
                     <td>${i}</td>
                     <td>${task.nome}</td>
                     <td>${formatDate(task.inicio)}</td>
-                    <td>${formatDate(task.fim)}</td>`;
+                    <td>${formatDate(task.fim)}</td>
+                    <td><i id='remove-task-${task.idTask}' idtask='${task.idTask}' class='fas fa-trash-alt remove-task as-button' title="Eliminar tarefa"></i></td>`;
 
         volunteers.forEach((volunteer) => {
 
@@ -171,6 +173,45 @@ const renderTasks = async (idConference, conferenceName, urlBase) => {
 
         renderTasks(idConference, conferenceName);
     });
+
+    // Manage click delete task    
+    const btnDeleteTask = document.getElementsByClassName("remove-task");
+    for (let i = 0; i < btnDeleteTask.length; i++) {
+        btnDeleteTask[i].addEventListener("click", function () {
+            let taskId = this.getAttribute("idtask");
+
+            Swal.fire({
+                title: 'Tem a certeza?',
+                text: "Não será possível reverter a remoção!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Remover'
+            }).then(async (result) => {
+                if (result.value) {
+                    try {
+                        const response = await fetch(`${urlBase}/tasks/${taskId}`,
+                            {
+                                method: "DELETE"
+                            }
+                        );
+                    } catch (err) {
+                        Swal.fire({
+                            title: 'Erro!',
+                            text: err,
+                            icon: 'error',
+                            showCancelButton: false,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Fechar'
+                        });
+                    }
+                    renderTasks(idConference, conferenceName, urlBase);
+                }
+            });
+        });
+    }
 
     // Gerir a participação do voluntário
     const chkVolunteerDoesTask = document.getElementsByClassName("volunteer-does-task");

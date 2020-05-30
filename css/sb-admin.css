@@ -376,4 +376,13 @@ body.sidebar-toggled footer.sticky-footer {
 
 .as-button{
   cursor: pointer;
+  padding: 2px;
+}
+
+.fa-trash-alt {
+  color: #dc3545 !important;
+}
+
+.fa-edit {
+  color: #17a2b8 !important;
 }
