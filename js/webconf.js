@@ -202,8 +202,7 @@ window.onload = function () {
                             imageUrl: speaker.foto,
                             imageWidth: 400,
                             imageHeight: 400,
-                            imageAlt: 'Foto do orador',
-                            animation: false
+                            imageAlt: 'Foto do orador'
                         });
                     }
                 }
