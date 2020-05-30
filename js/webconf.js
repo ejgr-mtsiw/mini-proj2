@@ -1,12 +1,32 @@
 window.onload = function () {
     const urlBase = "https://mtsiw.duckdns.org/pwa";
+    const idConference = 1;
 
     const btnLogin = document.getElementById("btnLogin");
     const btnRegister = document.getElementById("btnRegister");
     const aSponsors = document.getElementById("aSponsors");
+    const aSpeakers = document.getElementById("aSpeakers");
+    const aAbout = document.getElementById("aAbout");
+    const aContacts = document.getElementById("aContacts");
 
-    aSponsors.addEventListener("click", () => {
+    aSponsors.addEventListener("click", (event) => {
+        event.preventDefault();
         document.getElementById("sponsors").scrollIntoView({ behavior: 'smooth' });
+    });
+
+    aSpeakers.addEventListener("click", (event) => {
+        event.preventDefault();
+        document.getElementById("speakers").scrollIntoView({ behavior: 'smooth' });
+    });
+
+    aAbout.addEventListener("click", (event) => {
+        event.preventDefault();
+        document.getElementById("sobre").scrollIntoView({ behavior: 'smooth' });
+    });
+
+    aContacts.addEventListener("click", (event) => {
+        event.preventDefault();
+        document.getElementById("contacts").scrollIntoView({ behavior: 'smooth' });
     });
 
     // Autenticar administrador na área privada
@@ -90,7 +110,7 @@ window.onload = function () {
                     return
                 }
 
-                return fetch(`${urlBase}/conferences/1/participants/`, {
+                return fetch(`${urlBase}/conferences/${idConference}/participants/`, {
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded"
                     },
@@ -124,10 +144,10 @@ window.onload = function () {
       Get speakers from server
     */
     (async () => {
-        const renderSpeakers = document.getElementById("renderSpeakers")
-        let txtSpeakers = ""
-        const response = await fetch(`${urlBase}/conferences/1/speakers`)
-        const speakers = await response.json()
+        const renderSpeakers = document.getElementById("renderSpeakers");
+        let txtSpeakers = "";
+        const response = await fetch(`${urlBase}/conferences/${idConference}/speakers`);
+        const speakers = await response.json();
 
         for (const speaker of speakers) {
             txtSpeakers += `
@@ -137,7 +157,7 @@ window.onload = function () {
         <h4>${speaker.nome}</h4>
         <p class="text-muted">${speaker.cargo}</p>
         <ul class="list-inline social-buttons">`
-            if (speaker.twitter !== null) {
+            if (speaker.twitter) {
                 txtSpeakers += `
         <li class="list-inline-item">
           <a href="${speaker.twitter}" target="_blank">
@@ -145,7 +165,7 @@ window.onload = function () {
           </a>
         </li>`
             }
-            if (speaker.facebook !== null) {
+            if (speaker.facebook) {
                 txtSpeakers += `
         <li class="list-inline-item">
           <a href="${speaker.facebook}" target="_blank">
@@ -153,7 +173,7 @@ window.onload = function () {
           </a>
         </li>`
             }
-            if (speaker.linkedin !== null) {
+            if (speaker.linkedin) {
                 txtSpeakers += `
         <li class="list-inline-item">
           <a href="${speaker.linkedin}" target="_blank">
@@ -165,9 +185,9 @@ window.onload = function () {
         </ul>
       </div>
     </div>
-    `
+    `;
         }
-        renderSpeakers.innerHTML = txtSpeakers
+        renderSpeakers.innerHTML = txtSpeakers;
 
 
         // Gerir clique na imagem para exibição da modal    
@@ -184,7 +204,7 @@ window.onload = function () {
                             imageHeight: 400,
                             imageAlt: 'Foto do orador',
                             animation: false
-                        })
+                        });
                     }
                 }
             })
@@ -198,10 +218,10 @@ window.onload = function () {
     */
 
     (async () => {
-        const renderSponsors = document.getElementById("renderSponsors")
-        let txtSponsors = ""
-        const response = await fetch(`${urlBase}/conferences/1/sponsors`)
-        const sponsors = await response.json()
+        const renderSponsors = document.getElementById("renderSponsors");
+        let txtSponsors = "";
+        const response = await fetch(`${urlBase}/conferences/${idConference}/sponsors`);
+        const sponsors = await response.json();
 
         for (const sponsor of sponsors) {
             txtSponsors += `
@@ -219,7 +239,9 @@ window.onload = function () {
     */
 
     const contactForm = document.getElementById("contactForm")
-    contactForm.addEventListener("submit", async function () {
+    contactForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
         const name = document.getElementById("name").value
         const email = document.getElementById("email").value
         //const phone = document.getElementById("phone").value
@@ -234,7 +256,11 @@ window.onload = function () {
         const result = await response.json()
 
         if (typeof result.success != "undefined") {
-            Swal.fire('Envio de mensagem', result.message.pt, 'success')
+            Swal.fire({
+                title: 'Envio de mensagem',
+                text: result.message.pt,
+                icon: 'success'
+            });
         } else {
             for (error in result) {
                 document.getElementById("#" + error.param)
