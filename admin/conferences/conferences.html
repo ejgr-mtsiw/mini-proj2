@@ -12,8 +12,6 @@
     if (!sessionStorage.token) {
       window.location.replace("../../index.html")
     }
-
-    const idConference = 1;
   </script>
 
   <!-- Bootstrap CSS -->
@@ -241,7 +239,7 @@
   <!-- Custom scripts for all pages-->
   <script type="module">
     import bootConference from './conferences.js';
-    bootConference(idConference);
+    bootConference();
   </script>
 </body>
 

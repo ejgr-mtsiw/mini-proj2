@@ -6,7 +6,7 @@ import { renderCommittee, hideTab as hideCommitteeTab } from './conferences.comm
 import { renderTasks, hideTab as hideTasksTab } from './conferences.tasks.js';
 import { renderParticipants, hideTab as hideParticipantsTab } from './conferences.participants.js';
 
-const bootConferences = async (idConference) => {
+const bootConferences = async () => {
     let isNew = true;
 
     // References to HTML objects
@@ -96,7 +96,7 @@ const bootConferences = async (idConference) => {
         renderConferences();
     })
 
-    const renderConferences = async (idConference) => {
+    const renderConferences = async () => {
         let strHtml = `
             <thead >
                 <tr><th class='w-100 text-center bg-warning' colspan='6'>Lista de Conferências</th></tr>
@@ -219,7 +219,7 @@ const bootConferences = async (idConference) => {
     }
 
     frmConference.reset();
-    renderConferences(idConference);
+    renderConferences();
 }
 
 export { bootConferences as default };
