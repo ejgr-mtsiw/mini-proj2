@@ -18,4 +18,4 @@ Todos os pedidos estão ser feitos baseados na API original do livro até ao com
 
 A partir do commit [cb62175](https://github.com/ejgr-mtsiw/mini-proj2/commit/cb62175edd0e8e0989cd87d62184c44463f5314e) , todos os pedidos são feitos recorrendo à API desenvolvida no (mini-proj3), que expandiu a API do livro, criando os endpoints necessários para as novas entidades criadas.
 
-A página principal corresponde apenas a uma conferência (`idConference = 1`) mas alterando esta constante no ficheiro `js/webconf.js` é possível obter os dados da conferência correspondente (se existir), isto permite definir várias páginas de entrada para diferentes conferências utilizando o mesmo back-office.
+A página principal corresponde apenas a uma conferência (`idConference = 1`) mas alterando esta constante no ficheiro `js/webconf.js`, ou através da query string (por exemplo: `https://mtsiw.duckdns.org/pwa/index.html?idConference=2`), é possível obter os dados da conferência correspondente (se existir), isto permite definir várias páginas de entrada para diferentes conferências utilizando o mesmo back-office.
