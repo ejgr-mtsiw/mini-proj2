@@ -78,19 +78,17 @@ const renderSponsors = async (idConference, conferenceName, urlBase) => {
         });
     }
 
-    showTab();
+    enableTab();
 }
 
-function showTab() {
-    // Show tasks tab link
-    tabSponsors.classList.remove('invisible');
-    tabSponsors.classList.add('visible');
+function enableTab() {
+    // Enables tasks tab link
+    tabSponsors.classList.remove('disabled');
 }
 
-function hideTab() {
-    // Hide tasks tab link
-    tabSponsors.classList.add('invisible');
-    tabSponsors.classList.remove('visible');
+function disableTab() {
+    // Disables tasks tab link
+    tabSponsors.classList.add('disabled');
 }
 
-export { renderSponsors, showTab, hideTab };
+export { renderSponsors, enableTab, disableTab };

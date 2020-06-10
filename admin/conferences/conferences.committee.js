@@ -79,19 +79,17 @@ const renderCommittee = async (idConference, conferenceName, urlBase) => {
             }
         });
     }
-    showTab();
+    enableTab();
 }
 
-function showTab() {
-    // Show tasks tab link
-    tabCommittee.classList.remove('invisible');
-    tabCommittee.classList.add('visible');
+function enableTab() {
+    // Enables committee tab link
+    tabCommittee.classList.remove('disabled');
 }
 
-function hideTab() {
-    // Hide tasks tab link
-    tabCommittee.classList.add('invisible');
-    tabCommittee.classList.remove('visible');
+function disableTab() {
+    // Disables committee tab link
+    tabCommittee.classList.add('disabled');
 }
 
-export { renderCommittee, showTab, hideTab };
+export { renderCommittee, enableTab, disableTab };

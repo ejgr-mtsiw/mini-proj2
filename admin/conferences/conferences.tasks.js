@@ -250,19 +250,17 @@ const renderTasks = async (idConference, conferenceName, urlBase) => {
     }
 
     prepareDateRange();
-    showTab();
+    enableTab();
 }
 
-function showTab() {
-    // Show tasks tab link
-    tabTasks.classList.remove('invisible');
-    tabTasks.classList.add('visible');
+function enableTab() {
+    // Enables tasks tab link
+    tabTasks.classList.remove('disabled');
 }
 
-function hideTab() {
-    // Hide tasks tab link
-    tabTasks.classList.add('invisible');
-    tabTasks.classList.remove('visible');
+function disableTab() {
+    // Disables tasks tab link
+    tabTasks.classList.add('disabled');
 }
 
 function formatDate(dateString) {
@@ -306,4 +304,4 @@ function prepareDateRange() {
     });
 }
 
-export { renderTasks, showTab, hideTab, formatDate };
+export { renderTasks, enableTab, disableTab, formatDate };

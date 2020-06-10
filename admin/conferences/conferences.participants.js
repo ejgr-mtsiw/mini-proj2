@@ -87,19 +87,17 @@ const renderParticipants = async (idConference, conferenceName, urlBase) => {
         });
     }
 
-    showTab();
+    enableTab();
 };
 
-function showTab() {
-    // Show tasks tab link
-    tabParticipants.classList.remove('invisible');
-    tabParticipants.classList.add('visible');
+function enableTab() {
+    // Enables participants tab link
+    tabParticipants.classList.remove('disabled');
 }
 
-function hideTab() {
-    // Hide tasks tab link
-    tabParticipants.classList.add('invisible');
-    tabParticipants.classList.remove('visible');
+function disableTab() {
+    // Disables participants tab link
+    tabParticipants.classList.add('disabled');
 }
 
-export { renderParticipants, showTab, hideTab };
+export { renderParticipants, enableTab, disableTab };

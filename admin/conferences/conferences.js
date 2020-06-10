@@ -1,10 +1,10 @@
 const urlBase = "https://mtsiw.duckdns.org/pwa";
 
-import { renderSpeakers, hideTab as hideSpeakersTab } from './conferences.speakers.js';
-import { renderSponsors, hideTab as hideSponsorsTab } from './conferences.sponsors.js';
-import { renderCommittee, hideTab as hideCommitteeTab } from './conferences.committee.js';
-import { renderTasks, hideTab as hideTasksTab } from './conferences.tasks.js';
-import { renderParticipants, hideTab as hideParticipantsTab } from './conferences.participants.js';
+import { renderSpeakers, disableTab as disableSpeakersTab } from './conferences.speakers.js';
+import { renderSponsors, disableTab as disableSponsorsTab } from './conferences.sponsors.js';
+import { renderCommittee, disableTab as disableCommitteeTab } from './conferences.committee.js';
+import { renderTasks, disableTab as disableTasksTab } from './conferences.tasks.js';
+import { renderParticipants, disableTab as disableParticipantsTab } from './conferences.participants.js';
 
 const bootConferences = async () => {
     let isNew = true;
@@ -18,11 +18,11 @@ const bootConferences = async () => {
     frmConference.addEventListener("reset", async (event) => {
         isNew = true;
 
-        hideSpeakersTab();
-        hideSponsorsTab()
-        hideCommitteeTab();
-        hideTasksTab();
-        hideParticipantsTab();
+        disableSpeakersTab();
+        disableSponsorsTab()
+        disableCommitteeTab();
+        disableTasksTab();
+        disableParticipantsTab();
     });
 
     frmConference.addEventListener("submit", async (event) => {
