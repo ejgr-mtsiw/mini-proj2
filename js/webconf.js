@@ -104,47 +104,53 @@ window.onload = function () {
             confirmButtonText: "Inscrever",
             cancelButtonText: "Cancelar",
             showLoaderOnConfirm: true,
-            preConfirm: () => {
-                const nome = document.getElementById('participant_nome').value
-                const email = document.getElementById('participant_email').value
+            preConfirm: async () => {
+                const nome = document.getElementById('participant_nome').value;
+                const email = document.getElementById('participant_email').value;
 
                 // very basic validation
                 if (nome.length == 0) {
-                    Swal.showValidationMessage('O nome é de preenchimento obrigatório!')
-                    return
+                    Swal.showValidationMessage('O nome é de preenchimento obrigatório!');
+                    return;
                 }
 
                 if (email.length == 0) {
-                    Swal.showValidationMessage('O email é de preenchimento obrigatório!')
-                    return
+                    Swal.showValidationMessage('O email é de preenchimento obrigatório!');
+                    return;
                 }
 
-                return fetch(`${urlBase}/conferences/${idConference}/participants/`, {
+                let msgBody = `idConference=${idConference}&email=${email}&nome=${nome}`;
+                let response = await fetch(`${urlBase}/conferences/${idConference}/participants/`, {
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded"
                     },
                     method: "POST",
-                    body: `idConference=${idConference}&email=${email}&nome=${nome}`
-                })
-                    .then((response) => {
-                        if (!response.ok) {
-                            throw new Error(response.statusText);
-                        }
-                        return response.json();
-                    })
-                    .catch(error => {
-                        Swal.showValidationMessage(`Request failed: ${error}`);
+                    body: msgBody
+                });
+
+                let result = await response.json();
+
+                if (result.success == true) {
+                    Swal.fire({
+                        title: 'Sucesso',
+                        text: result.message.pt,
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Fechar'
                     });
+                } else {
+                    Swal.fire({
+                        title: 'Erro!',
+                        text: result.message.pt,
+                        icon: 'error',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Fechar'
+                    });
+                }
             },
             allowOutsideClick: () => !Swal.isLoading()
-        }).then((result) => {
-            if (result.value) {
-                if (!result.value.err_code) {
-                    Swal.fire({ title: "Inscrição feita com sucesso!" })
-                } else {
-                    Swal.fire({ title: `${result.value.err_message}` })
-                }
-            }
         });
     });
 
@@ -197,7 +203,6 @@ window.onload = function () {
     `;
         }
         renderSpeakers.innerHTML = txtSpeakers;
-
 
         // Gerir clique na imagem para exibição da modal    
         const btnView = document.getElementsByClassName("viewSpeaker")
@@ -276,10 +281,6 @@ window.onload = function () {
             //Swal.fire('Envio de mensagem', result.message.pt, 'error')
         }
     });
-
-
-
-
 };
 
 function myMap() {
